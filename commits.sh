@@ -6,8 +6,10 @@ do
     echo "Conectando a $ip por telnet"
     sleep 1 # Espera 1 segundo para establecer conexión
     (
+        sleep 1 # Espera 1 segundo para introducir el usuario
+        echo "usuario" # Nombre de usuario
         sleep 1 # Espera 1 segundo para introducir la contraseña
-        echo "contraseña" # Reemplazar con la contraseña de acceso
+        echo "contraseña" # Contraseña de acceso
     ) | telnet $ip > /var/log/commits/$ip-$(date +"%Y-%m-%d").log
 done
 
@@ -18,9 +20,10 @@ do
     sleep 1 # Espera 1 segundo para establecer conexión
     (
         sleep 1 # Espera 1 segundo para introducir la contraseña
-        echo "contraseña" # Reemplazar con la contraseña de acceso
+        echo "contraseña" # Contraseña de acceso
     ) | ssh usuario@$ip "terminal length 0; show configuration commit changes all" > /var/log/commits/$ip-$(date +"%Y-%m-%d").log
 done
+
 
 
 Usar en crontab
